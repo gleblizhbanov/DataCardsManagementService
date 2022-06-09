@@ -14,7 +14,7 @@ namespace Services
     public class CardsManagementService : ICardsManagementService
     {
         private readonly string jsonFilePath;
-        private static int count = 0;
+        private int count;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CardsManagementService"/> class.
@@ -36,6 +36,14 @@ namespace Services
                 using var jsonWriter = new JsonTextWriter(writer);
                 jsonWriter.WriteStartArray();
                 jsonWriter.WriteEndArray();
+                this.count = 0;
+            }
+            else
+            {
+                using var reader = new StreamReader(jsonFilePath);
+                var json = reader.ReadToEnd();
+                var cards = JsonConvert.DeserializeObject<List<Card>>(json)!;
+                this.count = cards.LastOrDefault()?.Id ?? 0;
             }
         }
 
@@ -48,6 +56,7 @@ namespace Services
             return cards;
         }
 
+        /// <exception cref="CardNotFoundException">Thrown if the card with given identifier doesn't exist.</exception>
         /// <inheritdoc/>
         public async Task<Card> GetCardAsync(int id)
         {
@@ -60,18 +69,15 @@ namespace Services
         public async Task<int> CreateAsync(Card card)
         {
             var cards = await GetCardsAsync().ConfigureAwait(false);
-            
-            var oldId = card.Id;
             card.Id = ++count;
             
             cards.Add(card);
-            
-            var newId = card.Id;
-            card.Id = oldId;
-            
-            return newId;
+            await WriteFileAsync(cards);
+
+            return card.Id;
         }
 
+        /// <exception cref="CardNotFoundException">Thrown if the card with given identifier doesn't exist.</exception>
         /// <inheritdoc/>
         public async Task<bool> UpdateAsync(int id, Card card)
         {
@@ -89,9 +95,12 @@ namespace Services
 
             foundCard.Name = card.Name;
             foundCard.Image = card.Image;
+
+            await WriteFileAsync(cards);
+
             return true;
         }
-
+        
         /// <inheritdoc/>
         public async Task<bool> DeleteAsync(int id)
         {
@@ -101,11 +110,20 @@ namespace Services
                 if (cards[i].Id == id)
                 {
                     cards.RemoveAt(i);
+                    await WriteFileAsync(cards);
                     return true;
                 }
             }
 
             return false;
+        }
+
+        private async Task WriteFileAsync(IList<Card> cards)
+        {
+            var json = JsonConvert.SerializeObject(cards);
+            await using var writer = new StreamWriter(this.jsonFilePath);
+            using var jsonWriter = new JsonTextWriter(writer);
+            await jsonWriter.WriteRawAsync(json);
         }
     }
 }
