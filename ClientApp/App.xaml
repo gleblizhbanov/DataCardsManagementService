@@ -1,0 +1,23 @@
+﻿<Application x:Class="ClientApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ClientApp"
+             xmlns:views="clr-namespace:ClientApp.Views"
+             xmlns:viewModels="clr-namespace:ClientApp.ViewModels"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Common.xaml"/>
+                <ResourceDictionary Source="Styles/NavigationBar.xaml"/>
+             </ResourceDictionary.MergedDictionaries>
+
+             <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+                <views:HomeView/>
+             </DataTemplate>
+             <DataTemplate DataType="{x:Type viewModels:CreateViewModel}">
+                 <views:CreateView/>
+             </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
