@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using ClientApp.Models;
-
-namespace ClientApp.ViewModels
+﻿namespace ClientApp.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {

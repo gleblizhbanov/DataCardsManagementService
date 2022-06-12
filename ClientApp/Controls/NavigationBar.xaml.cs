@@ -1,17 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ClientApp.State.Navigators;
+using ClientApp.ViewModels;
 
 namespace ClientApp.Controls
 {
@@ -23,6 +16,37 @@ namespace ClientApp.Controls
         public NavigationBar()
         {
             InitializeComponent();
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Do you really want to delete selected cards?", "Delete Confirmation", MessageBoxButton.YesNo);
+            if (result is MessageBoxResult.Yes)
+            {
+                var navigator = (INavigator)DataContext;
+                var homeViewModel = (HomeViewModel)navigator.CurrentViewModel;
+                var selectedCards = homeViewModel.CardsListViewModel.SelectedCards;
+                if (selectedCards is null)
+                {
+                    return;
+                }
+                DeleteCards(selectedCards, navigator);
+            }
+        }
+
+        private static void DeleteCards(IEnumerable<Models.Card> cards, INavigator navigator)
+        {
+            var client = new HttpClient()
+            {
+                BaseAddress = new Uri("http://localhost:5000/"),
+            };
+            
+            foreach (var card in cards)
+            {
+                client.DeleteAsync($"api/Cards/{card.Id}").Wait();
+            }
+
+            navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
     }
 }

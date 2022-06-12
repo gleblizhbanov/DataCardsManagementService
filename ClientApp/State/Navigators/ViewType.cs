@@ -4,5 +4,6 @@
     {
         Home,
         Create,
+        Edit,
     }
 }

@@ -1,6 +1,15 @@
-﻿namespace ClientApp.ViewModels
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
+namespace ClientApp.ViewModels
 {
-    public class ViewModelBase
+    public class ViewModelBase : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

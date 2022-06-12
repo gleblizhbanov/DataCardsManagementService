@@ -16,11 +16,17 @@ namespace ClientApp.State.Navigators
             set
             {
                 this.currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                if (value is HomeViewModel model)
+                {
+                    model.CardsListViewModel.SelectionChanged += (sender, args) => OnPropertyChanged();
+                }
+
+                OnPropertyChanged();
             }
         }
 
-        public ICommand CurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

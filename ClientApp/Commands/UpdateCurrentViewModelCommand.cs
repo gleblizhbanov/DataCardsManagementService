@@ -28,6 +28,9 @@ namespace ClientApp.Commands
                     case ViewType.Create:
                         this.navigator.CurrentViewModel = new CreateViewModel();
                         break;
+                    case ViewType.Edit:
+                        this.navigator.CurrentViewModel = new EditViewModel();
+                        break;
                     default:
                         break;
                 }

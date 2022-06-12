@@ -7,6 +7,6 @@ namespace ClientApp.State.Navigators
     {
         ViewModelBase CurrentViewModel { get; set; }
 
-        ICommand CurrentViewModelCommand { get; }
+        ICommand UpdateCurrentViewModelCommand { get; }
     }
 }
