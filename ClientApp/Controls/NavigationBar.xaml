@@ -36,20 +36,20 @@
             </Grid.ColumnDefinitions>
 
             <RadioButton Grid.Column="0"
-                         IsChecked="{Binding CurrentViewModel, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:HomeViewModel}}" 
+                         IsChecked="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource EqualValueToParameterConverter}, ConverterParameter={x:Type viewModels:HomeViewModel}}" 
                          Content="Home" 
                          Command="{Binding UpdateCurrentViewModelCommand}" 
                          CommandParameter="{x:Static nav:ViewType.Home}"/>
             <RadioButton Grid.Column="1" Content="Create" Command="{Binding UpdateCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Create}"/>
             <RadioButton Grid.Column="3"
                          Content="Edit" 
-                         Visibility="{Binding CurrentViewModel, Converter={StaticResource ViewModelToEditButtonVisibilityConverter}}"
+                         Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource ViewModelToEditButtonVisibilityConverter}}"
                          Command="{Binding UpdateCurrentViewModelCommand}" 
                          CommandParameter="{x:Static nav:ViewType.Edit}"/>
             <Button Grid.Column="4"
                     Content="Delete"
                     Click="DeleteButton_Click"
-                    Visibility="{Binding CurrentViewModel, Converter={StaticResource ViewModelToDeleteButtonVisibilityConverter}}"/>
+                    Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource ViewModelToDeleteButtonVisibilityConverter}}"/>
         </Grid>
     </Grid>
 </UserControl>
