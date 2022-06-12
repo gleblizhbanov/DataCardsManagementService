@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ClientApp"
              xmlns:views="clr-namespace:ClientApp.Views"
-             xmlns:viewModels="clr-namespace:ClientApp.ViewModels"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewModels="clr-namespace:ClientApp.ViewModels">
     <Application.Resources>
          <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>

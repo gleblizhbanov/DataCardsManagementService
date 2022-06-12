@@ -8,7 +8,18 @@ namespace ClientApp.Utils
     {
         public static byte[] ConvertToByteArray(BitmapImage image)
         {
-            throw new NotImplementedException();
+            if (image is null)
+            {
+                return null;
+            }
+
+            var encoder = new JpegBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(image));
+            using (var memoryStream = new MemoryStream())
+            {
+                encoder.Save(memoryStream);
+                return memoryStream.ToArray();
+            }
         }
 
         public static BitmapImage ConvertToBitmapImage(byte[] array)
@@ -19,9 +30,7 @@ namespace ClientApp.Utils
             }
 
             var bitmapImage = new BitmapImage();
-            var arr = new byte[array.Length - 78];
-            Array.Copy(array, 78, arr, 0, arr.Length);
-            using (var memoryStream = new MemoryStream(arr))
+            using (var memoryStream = new MemoryStream(array))
             {
                 bitmapImage.BeginInit();
                 bitmapImage.CreateOptions = BitmapCreateOptions.PreservePixelFormat;

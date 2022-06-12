@@ -26,7 +26,9 @@ namespace ClientApp.Commands
                         this.navigator.CurrentViewModel = new HomeViewModel(CardsListViewModel.GetCardsListViewModel());
                         break;
                     case ViewType.Create:
-                        this.navigator.CurrentViewModel = new CreateViewModel();
+                        var createViewModel = new CreateViewModel();
+                        createViewModel.PropertyChanged += (sender, args) => this.Execute(ViewType.Home);
+                        this.navigator.CurrentViewModel = createViewModel;
                         break;
                     case ViewType.Edit:
                         this.navigator.CurrentViewModel = new EditViewModel();

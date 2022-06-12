@@ -23,7 +23,6 @@ namespace ClientApp
     {
         public MainWindow()
         {
-            this.DataContext = new MainViewModel();
             InitializeComponent();
         }
     }
