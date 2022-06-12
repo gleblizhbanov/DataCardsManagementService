@@ -17,6 +17,9 @@
              <DataTemplate DataType="{x:Type viewModels:CreateViewModel}">
                  <views:CreateView/>
              </DataTemplate>
+             <DataTemplate DataType="{x:Type viewModels:EditViewModel}">
+                 <views:EditView/>
+             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

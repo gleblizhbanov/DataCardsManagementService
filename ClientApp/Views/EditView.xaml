@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ClientApp.Views.CreateView"
+﻿<UserControl x:Class="ClientApp.Views.EditView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -13,8 +13,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="Create Card" FontSize="20" HorizontalAlignment="Center" Margin="0 30"/>
+        <TextBlock Grid.Row="0" Text="Edit Card" HorizontalAlignment="Center" FontSize="20" Margin="0 30"/>
         <controls:EditCardData Grid.Row="1" DataContext="{Binding Card}"/>
-        <Button Grid.Row="2" Margin="0 30" Width="80" Height="30" Content="Create" FontSize="14" Click="CreateButton_Click"/>
+        <Button Grid.Row="2" Margin="0 30" Width="100" Height="30" Content="Save changes" FontSize="14" Name="SaveButton" Click="SaveButton_Click"/>
     </Grid>
 </UserControl>

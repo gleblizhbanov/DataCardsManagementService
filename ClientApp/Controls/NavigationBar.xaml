@@ -44,12 +44,11 @@
             <RadioButton Grid.Column="3"
                          Content="Edit" 
                          Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource ViewModelToEditButtonVisibilityConverter}}"
-                         Command="{Binding UpdateCurrentViewModelCommand}" 
-                         CommandParameter="{x:Static nav:ViewType.Edit}"/>
+                         Checked="EditButton_Checked"/>
             <Button Grid.Column="4"
                     Content="Delete"
-                    Click="DeleteButton_Click"
-                    Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource ViewModelToDeleteButtonVisibilityConverter}}"/>
+                    Visibility="{Binding CurrentViewModel, Mode=OneWay, Converter={StaticResource ViewModelToDeleteButtonVisibilityConverter}}"
+                    Click="DeleteButton_Click"/>
         </Grid>
     </Grid>
 </UserControl>

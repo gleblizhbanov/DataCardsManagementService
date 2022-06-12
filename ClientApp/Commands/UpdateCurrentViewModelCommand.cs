@@ -31,7 +31,7 @@ namespace ClientApp.Commands
                         this.navigator.CurrentViewModel = createViewModel;
                         break;
                     case ViewType.Edit:
-                        this.navigator.CurrentViewModel = new EditViewModel();
+                        this.navigator.CurrentViewModel =  new EditViewModel();
                         break;
                     default:
                         break;

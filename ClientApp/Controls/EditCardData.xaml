@@ -14,14 +14,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBox Grid.Row="0" Width="100" FontSize="16" Text="{Binding Name}" HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="0" Width="150" FontSize="16" Text="{Binding Name}" HorizontalAlignment="Center"/>
                 <Grid Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Border Grid.Row="0" Width="180" Margin="0 15 0 0">
-                        <Image Source="{Binding BitmapImage}"/>
+                        <Image Width="150" Height="150" Source="{Binding BitmapImage}"/>
                     </Border>
                     <Button Grid.Row="1" Margin="20" FontSize="14" Content="Upload image..." Name="LoadImageButton" Click="LoadImageButton_Click"/>
                 </Grid>

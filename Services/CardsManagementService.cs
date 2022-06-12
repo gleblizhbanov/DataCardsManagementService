@@ -88,11 +88,6 @@ namespace Services
                 throw new CardNotFoundException(id);
             }
 
-            if (foundCard.Name == card.Name && foundCard.Image.SequenceEqual(card.Image))
-            {
-                return false;
-            }
-
             foundCard.Name = card.Name;
             foundCard.Image = card.Image;
 

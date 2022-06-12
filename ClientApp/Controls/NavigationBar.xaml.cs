@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Windows;
 using System.Windows.Controls;
@@ -47,6 +48,17 @@ namespace ClientApp.Controls
             }
 
             navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
+        }
+        
+        private void EditButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var navigator = (INavigator)DataContext;
+            var homeViewModel = (HomeViewModel)navigator.CurrentViewModel;
+            var selectedCard = homeViewModel.CardsListViewModel.SelectedCards[0];
+            navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Edit);
+            var editViewModel = (EditViewModel)navigator.CurrentViewModel;
+            editViewModel.Card = selectedCard;
+            editViewModel.PropertyChanged += (_, args) => navigator.UpdateCurrentViewModelCommand.Execute(ViewType.Home);
         }
     }
 }

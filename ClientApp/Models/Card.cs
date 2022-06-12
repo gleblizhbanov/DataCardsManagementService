@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using ClientApp.Utils;
 using System.Windows.Media.Imaging;
+using Newtonsoft.Json;
 
 namespace ClientApp.Models
 {
@@ -24,6 +26,7 @@ namespace ClientApp.Models
             }
         }
 
+        [JsonIgnore]
         public BitmapImage BitmapImage
         {
             get => bitmapImage ?? Converter.ConvertToBitmapImage(image);
